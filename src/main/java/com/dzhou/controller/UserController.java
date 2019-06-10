@@ -5,6 +5,8 @@ import com.dzhou.dao.UserDao;
 import com.dzhou.entity.TBdRole;
 import com.dzhou.entity.TBdUser;
 import com.dzhou.mapper.UserMapper;
+import com.dzhou.tool.PageDTO;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,10 @@ public class UserController {
     @Autowired
     private TBdRoleDao roleDao;
 
-    @RequestMapping(path = "/list", method = RequestMethod.GET)
-    public List<TBdUser> listuser() {
+    @RequestMapping(path = "/list", method = RequestMethod.POST)
+    public List<TBdUser> listuser(@RequestBody  PageDTO page) {
         log.info("in controller {}{}", 1, 1);
+        PageHelper.startPage(page.getPagenum(), page.getPagesize());
         return this.mapper.queryUsers();
     }
 
@@ -52,6 +55,7 @@ public class UserController {
         this.userDao.deleteByPrimaryKey(u);
         return "success";
     }
+    //user分页
     //user的一对多，一对一方法
 
     public TBdUser selectUser(@PathVariable long id) {

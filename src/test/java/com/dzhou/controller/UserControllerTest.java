@@ -1,5 +1,6 @@
 package com.dzhou.controller;
 
+import com.dzhou.tool.PageDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
@@ -38,6 +39,9 @@ public class UserControllerTest {
 
     @Test
     public void listuser() throws Exception {
-        log.info("打印{}", userController.listuser().toString());
+        PageDTO page = new PageDTO();
+        page.setPagenum(1);
+        page.setPagesize(1);
+        log.info("打印{}", userController.listuser(page).toString());
     }
 }
