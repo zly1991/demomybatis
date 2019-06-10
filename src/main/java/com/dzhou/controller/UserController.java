@@ -20,11 +20,11 @@ import java.util.List;
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
-    @Autowired
+    @Autowired(required = false)
     private UserMapper mapper;
-    @Autowired
+    @Autowired(required = false)
     private UserDao userDao;
-    @Autowired
+    @Autowired(required = false)
     private TBdRoleDao roleDao;
 
     @RequestMapping(path = "/list", method = RequestMethod.POST)
