@@ -1,13 +1,13 @@
 package com.dzhou.controller;
 
+import com.dzhou.dao.TBdRoleDao;
 import com.dzhou.dao.UserDao;
-import com.dzhou.entity.User;
+import com.dzhou.entity.TBdRole;
+import com.dzhou.entity.TBdUser;
 import com.dzhou.mapper.UserMapper;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -22,29 +22,43 @@ public class UserController {
     private UserMapper mapper;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private TBdRoleDao roleDao;
 
     @RequestMapping(path="/list",method = RequestMethod.GET)
-    public List<User> listuser(){
+    public List<TBdUser> listuser(){
         log.info("in controller {}{}",1,1);
        return this.mapper.queryUsers();
     }
     @PostMapping("/update")
-    public String updateUser(@RequestBody User u){
+    public String updateUser(@RequestBody TBdUser u){
        int x= this.userDao.updateByPrimaryKeySelective(u);
 //        int x= this.userDao.updateByPrimaryKey(u);
        log.info(x+"");
         return "success";
     }
     @PostMapping("/addUser")
-    public String insertUser(@RequestBody User u){
+    public String insertUser(@RequestBody TBdUser u){
         this.userDao.insert(u);
         return  "success";
     }
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public String deleteUser(@RequestBody long id){
-        User u=new User();
+        TBdUser u=new TBdUser();
         u.setId(Long.valueOf(id).intValue());
         this.userDao.deleteByPrimaryKey(u);
         return "success";
+    }
+    public TBdUser selectUser(@PathVariable long id){
+        return this.userDao.selectByPrimaryKey(id);
+    }
+
+    @PostMapping("/userRole/{id}")
+    public TBdUser selectUserRole(@PathVariable long id){
+        return  this.userDao.queryUserRoleId(id);
+    }
+    @PostMapping("/role/{userid}")
+    public List<TBdRole>selectRole(@PathVariable long userid){
+        return  this.roleDao.selectTBdRoleByUserId(userid);
     }
 }

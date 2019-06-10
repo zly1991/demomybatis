@@ -1,6 +1,9 @@
 package com.dzhou.mapper;
 
-import com.dzhou.entity.User;
+import com.dzhou.entity.TBdUser;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -10,5 +13,5 @@ import java.util.List;
  */
 public interface UserMapper {
     @Select("select * from t_bd_user")
-    public List<User> queryUsers();
+    public List<TBdUser> queryUsers();
 }
