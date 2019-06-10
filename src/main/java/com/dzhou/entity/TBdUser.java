@@ -10,9 +10,17 @@ public class TBdUser {
   private String username;
   private String password;
   private List<TBdRole> tBdRole;
-
   public List<TBdRole> gettBdRole() {
     return tBdRole;
+  }
+  public TBdUserInfo tBdUserInfo;
+
+  public TBdUserInfo gettBdUserInfo() {
+    return tBdUserInfo;
+  }
+
+  public void settBdUserInfo(TBdUserInfo tBdUserInfo) {
+    this.tBdUserInfo = tBdUserInfo;
   }
 
   public void settBdRole(List<TBdRole> tBdRole) {

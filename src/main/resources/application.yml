@@ -5,15 +5,10 @@ spring:
     password: 12345678
     username: root
 
-
-#logging:
-#  level:
-#    org:
-#      apache:
-#        ibatis:
-#          binding: debug
-#    @GeneratedValue(generator = "JDBC")debug
-#  path: com.dzhou
 logging:
   level:
     root: debug
+#自动下划线转驼峰
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

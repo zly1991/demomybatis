@@ -13,8 +13,17 @@ public class TBdRole {
   private String roleCode;
  @Column(name ="role_name")
   private String roleName;
+  private String remark;
 
-  public Long getId() {
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Long getId() {
     return id;
   }
 
@@ -39,4 +48,12 @@ public class TBdRole {
     this.roleName = roleName;
   }
 
+    @Override
+    public String toString() {
+        return "TBdRole{" +
+                "id=" + id +
+                ", roleCode='" + roleCode + '\'' +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 }
